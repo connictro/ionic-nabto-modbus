@@ -1,0 +1,56 @@
+<!--
+  Generated template for the AclEdit page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit user</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="home()">
+        <ion-icon name="home" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>
+    Control how <em>{{user.name}}</em> may access your {{device.product}} device.
+  </p>
+  
+  <h2>Remote access</h2>
+  <p>
+    If remote access is enabled for your {{device.product}} device, allow this specific user to access it from remote.
+  </p>
+  <ion-list>
+    <ion-item>
+      <ion-label>Remote access</ion-label>
+      <ion-toggle [disabled]="!device.remoteAccessEnabled" [(ngModel)]="hasRemoteAccess" (ionChange)="updatePermissions()" (tap)="tapped()" ></ion-toggle>
+    </ion-item>
+  </ion-list>
+  
+  <h2>Display name</h2>
+  <p>
+    Change the display name you see for the user's device, e.g. "Dad's iPhone" instead of the name the user suggested when pairing (e.g. "iPhone 5").
+  </p>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Name to use in list</ion-label>
+      <ion-input required type="text" [(ngModel)]="user.name" name="title" (blur)="updateName()"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div [hidden]="user.isOwner()">
+    <h2>Remove user</h2>
+    Revoke the access granted to <em>{{user.name}}</em>
+    <button ion-button color="red"  block (click)="removeUser()">
+      Remove this user
+    </button>
+  </div>
+
+</ion-content>

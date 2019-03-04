@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{deviceName}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="home()">
+        <ion-icon name="home" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <!-- Modbus variables list -->
+
+  </ion-list>
+
+   <ng-container *ngFor="let regconf of registerConfigurations; let i = index">  <!-- *ngFor :  registerConfigurations;Tells angular to iterate over a list -->
+   <ion-item *ngIf="i<2">
+      <ion-label   fixed>{{regconf.n}}</ion-label>
+      <div item-end>{{regconf.v}}</div>
+    </ion-item>
+    </ng-container>  
+
+
+
+
+
+  <ion-item><ion-label>MexicanEggSwitch</ion-label> <ion-toggle id=2 [(ngModel)]="MexicanEggSwitch" color= "success" (ionChange) = "switchTapped('MexicanEggSwitch')"></ion-toggle></ion-item>
+  <ion-item><ion-label>ScentedLambSwitch</ion-label> <ion-toggle id=3 [(ngModel)]="ScentedLambSwitch" color="success" (ionChange) = "switchTapped('ScentedLambSwitch')"></ion-toggle></ion-item>
+  <ion-item><ion-label>WalnutSwitch</ion-label> <ion-toggle id=4 [(ngModel)]="WalnutSwitch" color="success" (ionChange) = "switchTapped('WalnutSwitch')" ></ion-toggle></ion-item>
+  <ion-item><ion-label>AlfredoSwitch</ion-label> <ion-toggle id=1 [(ngModel)]="AlfredoSwitch" color="success" (ionChange) = "switchTapped('AlfredoSwitch')" ></ion-toggle></ion-item>
+
+
+  <!-- refresh and config buttons -->
+  <ion-row>
+    <ion-col text-left>
+      <button [disabled]="busy" ion-button icon-begin (tap)="refresh()" color="light">
+        <ion-icon name="refresh"></ion-icon>&nbsp;Refresh
+      </button>
+    </ion-col>
+    <ion-col text-right>
+      <button ion-button icon-end (tap)="showSettingsPage()" color="light">
+        Settings&nbsp;<ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+

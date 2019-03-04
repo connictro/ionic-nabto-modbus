@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{shortTitle}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="home()">
+        <ion-icon name="home" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img [src]="device.iconUrl">
+      </ion-thumbnail>
+      <h2>{{device.name}}</h2>
+      <p>{{device.product}}</p>
+    </ion-item>
+  </ion-list>
+
+  <div [hidden]="success">   
+    <p>You are about to pair your {{operatingSystem}} device with the {{device.product}} <em>"{{device.name}}"</em>.</p>
+  
+    <button ion-button block (click)="pair()">
+      Confirm pairing 
+      <ion-spinner [hidden]="!busy"></ion-spinner>
+    </button>
+  </div>
+  
+  <div [hidden]="!success">
+
+    <div style="margin-top: 0px; text-align: center; font-size: 150px;">
+      <ion-icon color="primary" name="checkmark-circle-outline"></ion-icon>
+    </div>
+
+    <button ion-button block (click)="showVendorPage()">
+      Go to your new device
+    </button>
+    
+    <button ion-button color="light" block (click)="back()">
+      Back to overview
+    </button>
+  </div>
+
+</ion-content>

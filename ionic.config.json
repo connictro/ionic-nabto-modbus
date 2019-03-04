@@ -1,0 +1,7 @@
+{
+  "name": "ionic-starter-nabto",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

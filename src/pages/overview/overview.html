@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="showHelpPage()">
+        <ion-icon color="secondary" name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Overview</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showSettingsPage()">
+        <ion-icon color="secondary" name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngIf="(devices | async)?.length === 0">
+    <ion-card-header>
+      No known devices
+    </ion-card-header>
+    <ion-card-content>
+      Add a device by clicking the button below to scan the local network for available devices.
+      </ion-card-content>
+  </ion-card>
+
+  <ion-list text-wrap>
+    <ion-item *ngFor="let device of devices | async" (tap)="deviceTapped($event, device)">
+      <ion-thumbnail item-start>
+        <img [src]="device.iconUrl" (error)="badImage(device)">
+      </ion-thumbnail>
+      <h2>{{device.name}}
+        <ion-icon style="font-size: 16px" [hidden]="!device.reachable" name="checkmark-circle" color="green"></ion-icon>
+        <ion-icon style="font-size: 16px" [hidden]="device.reachable" name="alert" color="red"></ion-icon>
+      </h2>
+      <p>{{device.description}}</p>
+      <ion-icon [hidden]="!device.reachable" name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+  
+  <!-- refresh and add buttons -->
+  <ion-row>
+    <ion-col text-left>
+      <button ion-button icon-begin (tap)="refresh()" color="light">
+        <ion-icon name="refresh"></ion-icon>&nbsp;
+        Refresh
+      </button>
+    </ion-col>
+    <ion-col text-right>
+      <button ion-button icon-end (tap)="addNewDevice()" color="primary">
+        Add new
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
